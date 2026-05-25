@@ -31,11 +31,17 @@ public:
     // Apply the transform to a point.  Returns pos unchanged if not active.
     Vec3d apply(const Vec3d &pos) const;
 
+    // Apply the inverse transform.  Returns pos unchanged if not active.
+    // Used by validators that need to compare emitted machine-frame
+    // coordinates against build-volume bounds.
+    Vec3d apply_inverse(const Vec3d &pos) const;
+
     bool is_active() const { return m_active; }
 
 private:
-    bool        m_active    = false;
-    Transform3d m_transform = Transform3d::Identity();
+    bool        m_active            = false;
+    Transform3d m_transform         = Transform3d::Identity();
+    Transform3d m_transform_inverse = Transform3d::Identity();
 };
 
 } // namespace Slic3r
