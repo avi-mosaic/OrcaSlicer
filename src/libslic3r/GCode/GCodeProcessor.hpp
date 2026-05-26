@@ -232,6 +232,11 @@ class Print;
         bool support_traditional_timelapse{true};
         float printable_height;
         float z_offset;
+        // Belt printer: post-gcode shear/scale/post_remap is configured and
+        // non-identity.  When set, the layer Z values in `moves` are in the
+        // machine frame and should not be compared against `printable_height`
+        // (which lives in the build-volume frame).
+        bool machine_frame_transform_active{ false };
         // Belt printer: angle for coordinate transformation in preview.
         float belt_printer_angle{ 0.f };
         // Belt printer: per-axis shear config.
@@ -319,6 +324,7 @@ class Print;
             optimal_assignment = other.optimal_assignment;
             filament_change_count_map = other.filament_change_count_map;
             initial_layer_time = other.initial_layer_time;
+            machine_frame_transform_active = other.machine_frame_transform_active;
             belt_printer_angle = other.belt_printer_angle;
             belt_shear_x = other.belt_shear_x;
             belt_shear_x_angle = other.belt_shear_x_angle;
