@@ -1086,14 +1086,14 @@ void PrintObject::slice()
                 << " xy_correction=(" << m_belt_global_xy_correction.x() << "," << m_belt_global_xy_correction.y() << ")"
                 << " belt_floor_z_shift_before=" << (m_slicing_params.belt_floor_z_shift)
                 << " n_layers=" << m_layers.size();
-            if (std::abs(global_z_offset) > EPSILON) {
-                for (Layer *layer : m_layers)
-                    layer->print_z += global_z_offset;
-                // Keep belt floor clipping in sync with the shifted print_z
-                // values — the support generator sees globally-offset object
-                // layer print_z, so belt_floor_z_shift must match.
-                m_slicing_params.belt_floor_z_shift += global_z_offset;
-            }
+            // if (std::abs(global_z_offset) > EPSILON) {
+            //     for (Layer *layer : m_layers)
+            //         layer->print_z += global_z_offset;
+            //     // Keep belt floor clipping in sync with the shifted print_z
+            //     // values — the support generator sees globally-offset object
+            //     // layer print_z, so belt_floor_z_shift must match.
+            //     m_slicing_params.belt_floor_z_shift += global_z_offset;
+            // }
             if (!m_layers.empty()) {
                 BOOST_LOG_TRIVIAL(trace) << "[BELT-DEBUG]   post-adjustment"
                     << " first_layer.print_z=" << m_layers.front()->print_z
